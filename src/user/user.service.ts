@@ -59,21 +59,19 @@ export class UserService {
 
   async getAllUsers(): Promise<UserType[]> {
     const userKeys = await this.redis.smembers(REDIS_USERS_SET);
-    const usersFromRedis = await this.redis.mget(userKeys);
-    console.log(userKeys, usersFromRedis);
+    if (userKeys !== null && userKeys.length > 0) {
+      const usersFromRedis = await this.redis.mget(userKeys);
 
-    if (
-      usersFromRedis !== null &&
-      usersFromRedis.length > 0 &&
-      !usersFromRedis.includes(null)
-    ) {
-      return usersFromRedis
-        .map((user) => JSON.parse(user!))
-        .map((user) => ({
-          id: user.id,
-          fullName: user.fullName,
-          username: user.username,
-        }));
+      if (usersFromRedis !== null && usersFromRedis.length > 0) {
+        return usersFromRedis
+          .filter((user) => user !== null)
+          .map((user) => JSON.parse(user!))
+          .map((user) => ({
+            id: user.id,
+            fullName: user.fullName,
+            username: user.username,
+          }));
+      }
     }
 
     const users = await this.db.select().from(usersTable);

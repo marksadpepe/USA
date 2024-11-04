@@ -2,6 +2,7 @@ import {
   Injectable,
   BadRequestException,
   UnauthorizedException,
+  NotFoundException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
@@ -65,6 +66,10 @@ export class AuthService {
 
   async signIn(username: string, password: string): Promise<UserTokenType> {
     const user = await this.userService.findUserByUsername(username);
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
     const isPwdValid = await bcrypt.compare(password, user.password);
 
     if (!isPwdValid) {
