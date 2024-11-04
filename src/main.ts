@@ -8,9 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = app.get(ConfigService);
-  const { port } = config.get<ServerConfigType>(SERVER_CONF_KEY, {
+  const { port, prefix } = config.get<ServerConfigType>(SERVER_CONF_KEY, {
     infer: true,
   });
+
+  app.setGlobalPrefix(prefix);
 
   await app.listen(port, (): void =>
     Logger.log(`Application is running on ${port} port`, "Bootstrap"),
