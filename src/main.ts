@@ -1,8 +1,19 @@
 import { NestFactory } from "@nestjs/core";
+import { Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { AppModule } from "./app.module";
+import { SERVER_CONF_KEY, ServerConfigType } from "../configs";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+
+  const config = app.get(ConfigService);
+  const { port } = config.get<ServerConfigType>(SERVER_CONF_KEY, {
+    infer: true,
+  });
+
+  await app.listen(port, (): void =>
+    Logger.log(`Application is running on ${port} port`, "Bootstrap"),
+  );
 }
 bootstrap();
