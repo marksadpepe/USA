@@ -47,3 +47,6 @@ To run tests use this command:
 npm run test
 npm run test:cov
 ```
+
+## Swagger
+The Swagger is at ```http://localhost:<servier_port>/api/v1/swagger```.
