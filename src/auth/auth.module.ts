@@ -6,6 +6,7 @@ import { UserModule } from "../user/user.module";
 import { AuthService } from "./auth.service";
 import { JWT_CONF_KEY, JWTConfigType } from "../../configs";
 import { AuthController } from "./auth.controller";
+import { AuthGuard } from "./auth.guard";
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { AuthController } from "./auth.controller";
       global: true,
     }),
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   controllers: [AuthController],
+  exports: [AuthGuard],
 })
 export class AuthModule {}

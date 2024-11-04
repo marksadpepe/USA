@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException } from "@nestjs/common";
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { TokenService } from "../token/token.service";
@@ -12,6 +16,29 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly jwtService: JwtService,
   ) {}
+
+  get maxAgeValue(): number {
+    return this.tokenService.ttl * 24 * 60 * 60 * 1000;
+  }
+
+  getTokenFromHeaders(cookie: string | undefined): string {
+    if (cookie === undefined) {
+      throw new UnauthorizedException();
+    }
+
+    let token = "";
+    const cookies = cookie.split(";");
+
+    for (const c of cookies) {
+      if (c.includes("refreshToken")) {
+        const tmp = c.split("=");
+        token = tmp[tmp.length - 1];
+        break;
+      }
+    }
+
+    return token;
+  }
 
   async signUp(
     fullName: string,
