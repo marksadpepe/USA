@@ -7,6 +7,10 @@ import serverConfig, {
   ServerConfigType,
 } from "./server.configuration";
 import jwtConfig, { JWT_CONF_KEY, JWTConfigType } from "./jwt.configuration";
+import redisConfig, {
+  REDIS_CONF_KEY,
+  RedisConfigType,
+} from "./redis.configuration";
 
 export {
   databaseConfig,
@@ -18,4 +22,7 @@ export {
   jwtConfig,
   JWT_CONF_KEY,
   JWTConfigType,
+  redisConfig,
+  REDIS_CONF_KEY,
+  RedisConfigType,
 };
