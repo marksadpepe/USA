@@ -8,7 +8,7 @@ import { Redis } from "ioredis";
 import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DRIZZLE_TOKEN, REDIS_TOKEN, REDIS_USERS_SET } from "../common/consts";
-import { usersTable } from "../entities";
+import { usersTable } from "../drizzle/schema";
 import { UserType, UserFullType } from "../common/types";
 
 @Injectable()

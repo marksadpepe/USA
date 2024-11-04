@@ -6,3 +6,11 @@ export const usersTable = pgTable("users", {
   username: varchar({ length: 255 }).unique().notNull(),
   password: varchar({ length: 255 }).notNull(),
 });
+
+export const tokensTable = pgTable("tokens", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  refreshToken: varchar({ length: 500 }).notNull(),
+  userId: integer()
+    .references(() => usersTable.id)
+    .notNull(),
+});

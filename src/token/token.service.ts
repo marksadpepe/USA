@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DRIZZLE_TOKEN } from "../common/consts";
 import { TokenType } from "../common/types";
-import { tokensTable } from "../entities/";
+import { tokensTable } from "../drizzle/schema";
 import { JWT_CONF_KEY, JWTConfigType } from "../../configs";
 
 @Injectable()
