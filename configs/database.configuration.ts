@@ -9,7 +9,7 @@ export type DBConfigType = {
   database: string;
 };
 
-const parseDbUrl = (): DBConfigType => {
+export const parseDbUrl = (): DBConfigType => {
   const { DB_URL } = process.env;
   if (!DB_URL) {
     throw new Error("The database URL was not specified");
