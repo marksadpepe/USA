@@ -41,3 +41,9 @@ To connect to the Redis container, use this command:
 ```bash
 docker exec -it <container_name> redis-cli
 ```
+
+To run tests use this command:
+```bash
+npm run test
+npm run test:cov
+```
