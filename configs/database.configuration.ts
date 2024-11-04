@@ -1,5 +1,4 @@
 import { registerAs } from "@nestjs/config";
-import path from "path";
 
 export const DB_CONF_KEY = "database";
 export type DBConfigType = {
@@ -13,7 +12,7 @@ export type DBConfigType = {
 const parseDbUrl = (): DBConfigType => {
   const { DB_URL } = process.env;
   if (!DB_URL) {
-    throw new Error("Incorrect database URL format");
+    throw new Error("The database URL was not specified");
   }
 
   const { username, password, hostname, port, pathname } = new URL(DB_URL);
