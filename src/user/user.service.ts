@@ -41,7 +41,11 @@ export class UserService {
 
   async getAllUsers(): Promise<UserType[]> {
     const users = await this.db.select().from(usersTable);
-    return users;
+    return users.map((user) => ({
+      id: user.id,
+      fullName: user.fullName,
+      username: user.username,
+    }));
   }
 
   async findUserById(id: number): Promise<UserFullType> {
