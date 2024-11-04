@@ -49,4 +49,4 @@ npm run test:cov
 ```
 
 ## Swagger
-The Swagger is at ```http://localhost:<servier_port>/api/v1/swagger```.
+The Swagger is at ```http://localhost:<server_port>/api/v1/swagger```.
