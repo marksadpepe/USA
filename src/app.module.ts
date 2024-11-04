@@ -12,6 +12,7 @@ import { DrizzleModule } from "./drizzle/drizzle.module";
 import { UserModule } from "./user/user.module";
 import { TokenModule } from "./token/token.module";
 import { AuthModule } from "./auth/auth.module";
+import { RedisModule } from "./redis/redis.module";
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AuthModule } from "./auth/auth.module";
     UserModule,
     TokenModule,
     AuthModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
