@@ -5,6 +5,7 @@ import { AppService } from "./app.service";
 import { databaseConfig, serverConfig } from "../configs";
 import { DrizzleModule } from "./drizzle/drizzle.module";
 import { UserModule } from "./user/user.module";
+import { TokenModule } from "./token/token.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UserModule } from "./user/user.module";
     }),
     DrizzleModule,
     UserModule,
+    TokenModule,
   ],
   controllers: [AppController],
   providers: [AppService],
