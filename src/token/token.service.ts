@@ -1,13 +1,23 @@
 import { Injectable, Inject } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { DRIZZLE_TOKEN } from "../common/consts";
 import { TokenType } from "../common/types";
 import { tokensTable } from "../entities/";
+import { JWT_CONF_KEY, JWTConfigType } from "../../configs";
 
 @Injectable()
 export class TokenService {
-  constructor(@Inject(DRIZZLE_TOKEN) private readonly db: NodePgDatabase) {}
+  constructor(
+    @Inject(DRIZZLE_TOKEN) private readonly db: NodePgDatabase,
+    private readonly config: ConfigService,
+  ) {}
+
+  get ttl(): number {
+    return this.config.get<JWTConfigType>(JWT_CONF_KEY, { infer: true })
+      .expiresIn;
+  }
 
   async saveToken(userId: number, refreshToken: string): Promise<TokenType> {
     let tokenData = await this.findTokenByUserId(userId);

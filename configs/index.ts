@@ -6,6 +6,7 @@ import serverConfig, {
   SERVER_CONF_KEY,
   ServerConfigType,
 } from "./server.configuration";
+import jwtConfig, { JWT_CONF_KEY, JWTConfigType } from "./jwt.configuration";
 
 export {
   databaseConfig,
@@ -14,4 +15,7 @@ export {
   serverConfig,
   SERVER_CONF_KEY,
   ServerConfigType,
+  jwtConfig,
+  JWT_CONF_KEY,
+  JWTConfigType,
 };
