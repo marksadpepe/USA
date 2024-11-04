@@ -22,4 +22,5 @@ export default defineConfig({
     database: dbConfig.database,
     ssl: false,
   },
+  casing: "snake_case",
 });
