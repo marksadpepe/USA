@@ -3,6 +3,7 @@ import {
   ExecutionContext,
   Injectable,
   UnauthorizedException,
+  Logger,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
@@ -32,7 +33,7 @@ export class AuthGuard implements CanActivate {
 
       req["user"] = payload;
     } catch (err) {
-      console.log(err);
+      Logger.warn(err, "Authorization");
       throw new UnauthorizedException();
     }
 
